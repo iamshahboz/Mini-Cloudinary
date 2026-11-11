@@ -2,12 +2,12 @@ import aio_pika
 import aioboto3
 from fastapi import FastAPI
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import create_async_engine
+from app.db import engine
 
 from app.config import settings
 
 app = FastAPI(title="Mini Cloudinary")
-engine = create_async_engine(settings.database_url)
+
 
 
 async def check_postgres() -> bool:

@@ -93,7 +93,7 @@ flowchart LR
 ## 🗺️ Roadmap
 
 - [x] **Step 1:** Project skeleton and service health checks
-- [ ] **Step 2:** Database schema and migrations
+- [x] **Step 2:** Database schema and migrations
 - [ ] **Step 3:** Upload endpoint with API key authentication
 - [ ] **Step 4:** First worker: validate, strip metadata, resize
 - [ ] **Step 5:** Full pipeline: compress, WebP/AVIF, watermark, per-tenant presets
