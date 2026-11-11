@@ -14,5 +14,8 @@ class Settings(BaseSettings):
     s3_secret_key: str
     s3_endpoint_url: str | None = None
 
+    # Uploads
+    max_upload_bytes: int = 10 * 1024 * 1024  # 10 MB
+
 
 settings = Settings()

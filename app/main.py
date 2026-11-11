@@ -1,13 +1,28 @@
+from contextlib import asynccontextmanager
+
 import aio_pika
 import aioboto3
 from fastapi import FastAPI
 from sqlalchemy import text
-from app.db import engine
 
 from app.config import settings
+from app.db import engine
+from app.messaging import Publisher
+from app.routes import images
 
-app = FastAPI(title="Mini Cloudinary")
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    publisher = Publisher()
+    await publisher.connect()  # also declares exchange + queues
+    app.state.publisher = publisher
+    yield
+    await publisher.close()
+    await engine.dispose()
+
+
+app = FastAPI(title="Mini Cloudinary", lifespan=lifespan)
+app.include_router(images.router)
 
 
 async def check_postgres() -> bool:
